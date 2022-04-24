@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import ReactDom from "react-dom";
-import Counter from "./components/Counter";
-import SQLEditor from "./components/Editor/SQLEditor";
-import PostItem from "./components/PostItem";
-import ReactMarkdown from "react-markdown";
+import React, { useState} from "react";
 import "./styles/App.css";
 import "./style.css";
-import MarkdownEditor from "./components/Editor/MarkdownEditor";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
+import Layout, { Header } from "antd/lib/layout/layout";
+import axios from "axios";
+import { useEffect } from "react";
 
 function App() {
+
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -19,6 +17,17 @@ function App() {
     },
     { id: 2, title: "SQL+", body: "Лучший запрос в мире" },
   ]);
+
+
+  async function fetchPosts() {
+    const response = await axios.get("https://jsonplaceholder.typicode.com/posts?10")
+    setPosts(response.data)
+  }
+
+  useEffect (()=>{
+    fetchPosts()
+  },[])
+
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -30,15 +39,27 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
-      {posts.length ? (
-        <PostList remove={removePost} posts={posts} title="Список курсов" />
-      ) : (
-        <div style={{ textAlign: "center" }}>
-          {" "}
-          <h1>Пока нет подготовленных курсов</h1>
-        </div>
-      )}
+    <header style={{
+      margin : "10px  0px 10px 0px"
+    }}>
+    <a href="/" >Проверка </a>
+    <a href="/" >Курсы </a>
+    <a href="/" >Студенты </a>
+    </header>
+      <Layout style={{ background: "#fff" }}>
+
+        <PostForm create={createPost} />
+        {posts.length ? (
+          <PostList remove={removePost} posts={posts} title="Список курсов" />
+        ) : (
+          <div style={{ textAlign: "center" }}>
+            {" "}
+            <h1>Пока нет подготовленных курсов</h1>
+          </div>
+        )}
+    
+
+      </Layout>
     </div>
   );
 }
