@@ -1,0 +1,29 @@
+.editor {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
+  display: flex;
+}
+
+
+.demo {
+  display: flex;
+}
+
+.textarea {
+  margin-top: 10px;
+  background: #fafafa;
+  width: 50%;
+  height: 60vh;
+  padding: 20px;
+  font-size: 14px;
+  outline: none;
+}
+
+.markdown {
+  margin-top: 10px;
+  width: 50%;
+  height: 60vh;
+  padding: 20px;
+  font-size: 14px;
+}

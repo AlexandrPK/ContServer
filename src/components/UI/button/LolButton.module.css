@@ -1,0 +1,27 @@
+
+
+.LolButton{
+    display: inline-block;	
+	box-sizing: border-box;
+	padding: 0 24px;
+	margin: 15px;
+	outline: none;
+	border: none;    
+	height: 37px;
+	line-height: 37px;
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+	background-color: rgb(153, 153, 153);
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;  
+	transition: box-shadow .18s ease-out,background .18s ease-out,color .18s ease-out;
+}
+
+.LolButton:hover {
+	box-shadow: 0 1px 1px 0 #cfcfcf, 0 2px 5px 0 #cfcfcf;
+  }
