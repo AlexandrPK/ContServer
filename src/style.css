@@ -5,6 +5,13 @@
   display: flex;
 }
 
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgb(226, 216, 216);
+  margin: 16px 24px 16px 0;
+  float: left;
+}
 
 .demo {
   display: flex;

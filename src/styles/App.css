@@ -4,14 +4,11 @@
   box-sizing: border-box;
 }
 
-#root {
+/* #root {
 display: flex;
 justify-content: center;
-}
+} */
 
-.App {
-    width: 900px;
-}
 
 .post {
     display: flex;

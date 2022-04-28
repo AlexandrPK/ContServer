@@ -1,10 +1,10 @@
 import React from "react";
+import { Card } from "antd";
 import LolButton from "./UI/button/LolButton";
-
 
 const PostItem = (props) => {
   return (
-    <div className="post">
+    <Card hoverable style={{ margin:"10px" }}>
       <div className="post__content">
         <strong>
           {props.number}. {props.post.title}
@@ -14,7 +14,7 @@ const PostItem = (props) => {
       <div className="post__btns">
         <LolButton onClick={() => props.remove(props.post)}>Удалить</LolButton>
       </div>
-    </div>
+    </Card>
   );
 };
 

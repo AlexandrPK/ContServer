@@ -1,9 +1,10 @@
 import React from 'react'
-import classes from './LolInput.module.css'; 
+import { Input } from 'antd';
+
 
 const LolInput = (props) => {
   return (
-    <input className={classes.lolInput} {...props} />
+    <Input style={{margin:"5px"}}  {...props} />
   )
 }
 

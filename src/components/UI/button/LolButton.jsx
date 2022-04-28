@@ -1,11 +1,13 @@
 import React from 'react'
-import classes from './LolButton.module.css';
+import { Button } from 'antd';
+
+// import classes from './LolButton.module.css';
 
 const LolButton = ( {children, ...props}) => {
   return (
-    <button {...props} className={classes.LolButton}> 
+    <Button {...props} style={{margin:"5px"}}> 
     {children}
-    </button>
+    </Button>
   )
 }
 

@@ -15,6 +15,7 @@ const AllCourse = () => {
     { id: 2, title: "SQL+", body: "Лучший запрос в мире" },
   ]);
 
+  //TODO получение постов
   async function fetchPosts() {
     const response = await axios.get(
       "https://jsonplaceholder.typicode.com/posts?10"
@@ -36,7 +37,6 @@ const AllCourse = () => {
 
   return (
     <div>
-      <h1>Отдай мне все курсы и их редактирование</h1>
       <Layout style={{ background: "#fff" }}>
         <PostForm create={createPost} />
         {posts.length ? (
