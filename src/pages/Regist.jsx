@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Select } from "antd";
 // import { useDispatch } from 'react-redux'
 
 // import { registerThunk } from '../redux/registerSlice'
@@ -19,6 +19,8 @@ const tailLayout = {
     span: 16,
   },
 };
+
+const { Option } = Select;
 
 const RegisterForm = () => {
   // const dispatch = useDispatch()
@@ -63,17 +65,21 @@ const RegisterForm = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label="Email"
-          name="email"
+          name="group"
+          label=" Группа"
           rules={[
             {
               required: true,
-              type: "email",
-              message: "Введите действительный адрес электронной почты",
+              message: "Выберите группу",
             },
           ]}
         >
-          <Input />
+          <Select placeholder="Ваша группа">
+            <Option value="8371">8371</Option>
+            <Option value="8372">8372</Option>
+            <Option value="8373">8373</Option>
+            <Option value="8374">8374</Option>
+          </Select>
         </Form.Item>
         <Form.Item
           label="Email"
@@ -106,7 +112,7 @@ const RegisterForm = () => {
 
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
-            Pарегистрироваться
+            Зарегистрироваться
           </Button>
         </Form.Item>
       </Form>

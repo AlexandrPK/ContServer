@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button } from "antd";
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { message } from "antd";
 // import { nullErrorMessage } from '../redux/authSlice'
@@ -42,8 +43,7 @@ const Login = () => {
 
   return (
     <>
-
-      <h1 style={{ textAlign:"center", marginTop:"15px" }}>Вход</h1>
+      <h1 style={{ textAlign: "center", marginTop: "15px" }}>Вход</h1>
       <Form
         {...layout}
         name="basic"
@@ -64,7 +64,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input  />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email@ya.ru" />
         </Form.Item>
 
         <Form.Item
@@ -79,7 +79,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input.Password  />
+          <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
         </Form.Item>
 
         <Form.Item {...tailLayout}>

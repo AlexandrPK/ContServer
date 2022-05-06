@@ -16,16 +16,16 @@ const AllCourse = () => {
   ]);
 
   //TODO получение постов
-  async function fetchPosts() {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts?10"
-    );
-    setPosts(response.data);
-  }
+  // async function fetchPosts() {
+  //   const response = await axios.get(
+  //     "https://jsonplaceholder.typicode.com/posts?10"
+  //   );
+  //   setPosts(response.data);
+  // }
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  // useEffect(() => {
+  //   fetchPosts();
+  // }, []);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
