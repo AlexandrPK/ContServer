@@ -1,9 +1,26 @@
-import React from 'react'
+import axios from "axios";
+import React from "react";
+import qs from "qs";
 
 const Students = () => {
-  return (
-    <div><h1>Отдай мне всех учеников, я их добавлю, удалю</h1></div>
-  )
-}
+  // axios({
+  //   method: "POST",
+  //   url: "https://jsonplaceholder.typicode.com/posts",
+  //   data: { "userId": 1, username: "ivan@test.ru", password: "1234567Ok" },
+  //   headers: { "Content-Type": "application/x-www-form-urlencoded",},
+  // })
+  //   .then((response) => {
+  //     console.log(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
-export default Students
+  return (
+    <div>
+      <h1>Отдай мне всех учеников, я их добавлю, удалю</h1>
+    </div>
+  );
+};
+
+export default Students;
