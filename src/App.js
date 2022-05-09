@@ -13,8 +13,10 @@ import CheckTasks from "./pages/CheckTasks";
 import Students from "./pages/Students";
 import Login from "./pages/Login";
 import Regist from "./pages/Regist";
-import Task from "./pages/Task";
+import PasswordChange from "./pages/PasswordChange";
+import Task from "./pages/TaskCourse";
 import BankTasks from "./pages/BankTasks";
+import MyCourse from "./pages/MyCourse";
 
 function App() {
 
@@ -29,10 +31,13 @@ function App() {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["2"]}
+            defaultSelectedKeys={["0"]}
             style={{ lineHeight: "64px", display: "flex" }}
           >
             <Menu.Item key="0">
+              <Link to="/mycourses">Мои курсы </Link>
+            </Menu.Item>
+            <Menu.Item key="1">
               <Link to="/courses">Курсы </Link>
             </Menu.Item>
             <Menu.Item key="2">
@@ -53,8 +58,11 @@ function App() {
             <Menu.Item key="6">
               <Link to="/reg">Регистрация </Link>
             </Menu.Item>
+            <Menu.Item key="7">
+              <Link to="/passwordChange">Смена пароля</Link>
+            </Menu.Item>
             {isAuth===true? "": 
-              <Menu.Item key="7">
+              <Menu.Item key="8">
               <Link to="/">Выйти</Link>
               </Menu.Item>
             }
@@ -63,6 +71,7 @@ function App() {
 
         <Content style={{ padding: "0 50px", marginTop: 64 }}>
           <Routes>
+            <Route path="/mycourses" element={<MyCourse />} />
             <Route path="/courses" element={<AllCourse />} />
             <Route path="/banktasks" element={<BankTasks />} />
             <Route path="/courses/:id" element={<Task />} />
@@ -70,6 +79,7 @@ function App() {
             <Route path="/students" element={<Students />} />
             <Route path="/login" element={<Login />} />
             <Route path="/reg" element={<Regist />} />
+            <Route path="/passwordChange" element={<PasswordChange />} />
           </Routes>
         </Content>
 

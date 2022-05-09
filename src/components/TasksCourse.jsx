@@ -1,21 +1,24 @@
 import React from "react";
+import qs from "qs";
 import { Card } from "antd";
 import LolButton from "./UI/button/LolButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const PostItem = (props) => {
+const TasksCourse = (props) => {
   const navigate = useNavigate();
   return (
     <Card hoverable style={{ margin:" 0px 5px 10px 5px" }} onClick={() => navigate(`${props.post.id}`)}>
       <div className="post__content" >
         <strong>
-         {props.post.name}
+          {props.post.task.name}
         </strong>
-        <div>{props.post.year} - Учебный год </div>
+        <div>Сложность: {props.post.task.taskTypeId} </div>
+        <div style={{ color:"grey" }}>{props.post.deadline}</div>
       </div>
+
     </Card>
   );
 };
 
-export default PostItem;
+export default TasksCourse;

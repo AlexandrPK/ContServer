@@ -1,4 +1,5 @@
 import qs from "qs";
+import { message } from "antd";
 
 const axios = require("axios");
 
@@ -27,9 +28,10 @@ export default class API {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       });
+      
     } catch (error) {
-      console.log("payload in axios", payload);
-      console.error("axios error:", error);
+      console.log("payload in axios", error.message);
+      return error
     }
   }
 

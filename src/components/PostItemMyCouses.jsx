@@ -4,18 +4,18 @@ import LolButton from "./UI/button/LolButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const PostItem = (props) => {
+const PostItemMyCouses = (props) => {
   const navigate = useNavigate();
   return (
-    <Card hoverable style={{ margin:" 0px 5px 10px 5px" }} onClick={() => navigate(`${props.post.id}`)}>
+    <Card hoverable style={{ margin:" 0px 5px 10px 5px" }} onClick={() => navigate(`${props.post.courses.id}`)}>
       <div className="post__content" >
         <strong>
-         {props.post.name}
+         {props.post.courses.name}
         </strong>
-        <div>{props.post.year} - Учебный год </div>
+        <div style={{ color:"grey" }}>Открыт до: {props.post.nearestDeadline.slice(0,10)}</div>
       </div>
     </Card>
   );
 };
 
-export default PostItem;
+export default PostItemMyCouses;
