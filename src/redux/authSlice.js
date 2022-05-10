@@ -11,14 +11,15 @@ export const loginThunk = createAsyncThunk(
       
       // console.log('auth/loginThunk, response', response)
       console.log('auth/loginThunk, response', response)
- 
+      
       // Handle error from express 
       // if (response?.response?.data?.message) throw new Error(response?.response?.data?.message)
-
+      const responses = await api.role(response)
+      
       localStorage.setItem('userData', JSON.stringify({
-     token: response.headers.access_token,                 
+        token: response.headers.access_token,
+        roleID: responses.data.roleId,                 
       }))
-
       return response.data 
     }
   ) 
@@ -27,7 +28,7 @@ export const loginThunk = createAsyncThunk(
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        isAuth: true,  
+        isAuth: false,  
         token: null,
         roleld: {
           id: null,
@@ -45,13 +46,12 @@ export const authSlice = createSlice({
         state.isAuth = true
         state.token = action.payload.token
       },
-      role: (state, action) => {
-        state.roleld.name = "ROLE_ADMIN"
-        state.token = action.payload.token
-      },
       logout: (state) => {
         state.isAuth = false
         state.token = null
+      },
+      role:(state,action) =>{
+        state.isAuth.roleld.id = action.payload.token
       },
       nullErrorMessage: (state) => {
         state.errMessage = null
@@ -79,6 +79,6 @@ export const authSlice = createSlice({
   })
    
 
-  export const { login, logout, nullErrorMessage } = authSlice.actions
+  export const { login, logout, role, nullErrorMessage } = authSlice.actions
   
   export default authSlice.reducer

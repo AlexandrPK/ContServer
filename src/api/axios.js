@@ -9,14 +9,6 @@ const instance = axios.create({
 
 export default class API {
   async login(payload) {
-
-    //   .then((response) => {
-    //     instance.post("/login", payload);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     try {
       return await instance.post("/login",
       qs.stringify({
@@ -27,7 +19,22 @@ export default class API {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-      });
+      })
+      
+    } catch (error) {
+      console.log("payload in axios", error.message);
+      return error
+    }
+  }
+
+  async role(payload) {
+    try {
+      return await instance.get("api/userInfo",
+      {
+        headers: {
+          "Authorization": payload.headers.access_token,
+        },
+      })
       
     } catch (error) {
       console.log("payload in axios", error.message);
