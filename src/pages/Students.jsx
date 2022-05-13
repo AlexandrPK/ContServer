@@ -11,7 +11,7 @@ const Students = () => {
       const response = await axios.get(
         "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/api/users",{headers: { Authorization : data.token,}}
       );
-      console.log(response.data)
+      console.log("RESPONSE",response.data)
       setPosts(response.data);
     }
   
@@ -22,7 +22,7 @@ const Students = () => {
 
   return (
     <div>
-      <h1>Кнопочки добаить студента, и т.п</h1>
+      <h1>Кнопочки</h1>
       <TableStudents posts={posts}/>
     </div>
   );

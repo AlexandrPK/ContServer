@@ -6,7 +6,7 @@ import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/snippets/mysql";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 
-const SQLEditor = () => {
+const SQLEditor = (props) => {
   return (
     <AceEditor
       placeholder="Your SQL code"
@@ -15,12 +15,13 @@ const SQLEditor = () => {
       name="editor_sql"
       fontSize={14}
       color={'red'}
-      height={'100%'}
       width={'100%'}
+      height={250}
       showPrintMargin={false}
       showGutter={true}
       highlightActiveLine={true}
-      value={``}
+      value={props.value}
+      onChange={props.onChange ? v => props.onChange(v) : undefined}
       setOptions={{
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: true,

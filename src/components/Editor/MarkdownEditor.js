@@ -6,7 +6,7 @@ import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/snippets/markdown";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 
-const MarkdownEditor = () => {
+const MarkdownEditor = (props) => {
   return (
     <AceEditor
 
@@ -16,12 +16,13 @@ const MarkdownEditor = () => {
       name="editor_markdown"
       fontSize={14}
       color={"red"}
-      height={"100%"}
-      width={"100%"}
+      width={'100%'}
+      height={200}
       showPrintMargin={false}
       showGutter={true}
       highlightActiveLine={true}
-      value={``}
+      value={props.value}
+      onChange={props.onChange ? v => props.onChange(v) : undefined}
       setOptions={{
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: true,

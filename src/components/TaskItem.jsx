@@ -12,6 +12,7 @@ const TaskItem = (props) => {
         <strong>
           {props.post.name}
         </strong>
+        <div>{props.post.description?(props.post.description.slice(0,45)+"..."):("")}</div>
         <div>Сложность: {props.post.taskTypeId}</div>
       </div>
 

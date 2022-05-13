@@ -12,7 +12,7 @@ export default function PasswordChange() {
 
   async function fetchPosts() {
     const response = await axios.get(
-      "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/api/userInfo",
+      "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/allGroupsCourses",
       { headers: { Authorization: data.token } }
     );
 
@@ -20,7 +20,7 @@ export default function PasswordChange() {
   }
 
   useEffect(() => {
-    fetchPosts();
+    // fetchPosts();
   }, []);
 
   return (

@@ -94,7 +94,7 @@ const PasswordChangeForm = () => {
 
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
-            Войти
+            Сменить пароль
           </Button>
         </Form.Item>
       </Form>

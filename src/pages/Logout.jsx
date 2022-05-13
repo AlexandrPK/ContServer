@@ -26,6 +26,7 @@ const Logout = () => {
       "userData",
       JSON.stringify({
         token: "dddd",
+        auth: 'false',
       })
     );
     dispatch(logout());

@@ -13,6 +13,7 @@ const MyScores = () => {
       )
       .then( response => {
       const datas = {...response.data, }
+      console.log(datas)
       const post = [];
       
       for (let key in datas){
@@ -21,6 +22,8 @@ const MyScores = () => {
           course: datas[key].course.name,
           checkdate: datas[key].score.date.slice(0,10),
           score: datas[key].score.score,
+          review: datas[key].score.review,
+
         });
       }
       setPosts(post);

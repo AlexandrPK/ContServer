@@ -19,12 +19,15 @@ import Students from "../pages/Students";
 import Login from "../pages/Login";
 import Regist from "../pages/Regist";
 import PasswordChange from "../pages/PasswordChange";
-import Task from "../pages/TaskCourse";
+import TaskCourse from "../pages/TaskCourse";
 import BankTasks from "../pages/BankTasks";
 import MyCourse from "../pages/MyCourse";
 import MyScores from "../pages/MyScores";
 import Groups from "../pages/Groups";
 import Logout from "../pages/Logout";
+import TaskPage from "../pages/TaskPage";
+import TaskPageEdit from "../pages/TaskPageEdit";
+import AllCourseToScore from "../pages/AllCourseToScore";
 
 function LayoutMenu(props) {
   const data = JSON.parse(localStorage.getItem("userData"));
@@ -48,9 +51,9 @@ function LayoutMenu(props) {
   return (
     <div className="App">
       <Layout style={{ background: "#fff" }}>
-        <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+        <Header style={{ position: "fixed", zIndex: 1000, width: "100%" }}>
           <div className="logo" />
-          {isAuth ? (
+          {data.auth==="true" ? (
             data.roleID == 1 ? (
               <Menu
                 theme="dark"
@@ -106,7 +109,7 @@ function LayoutMenu(props) {
               theme="dark"
               mode="horizontal"
               defaultSelectedKeys={["0"]}
-              style={{ lineHeight: "64px", display: "flex" }}
+              style={{ lineHeight: "64px", display: "flex", zIndex: "100" }}
             >
               <Menu.Item key="0">
                 <Link to="/login">Логин </Link>
@@ -119,14 +122,17 @@ function LayoutMenu(props) {
         </Header>
 
         <Content style={{ padding: "0 50px", marginTop: 64 }}>
-          {isAuth ? (
+          {data.auth==="true" ? (
             data.roleID == 1 ? (
               <Routes>
                 <Route path="/" element={<AllCourse />} />
                 <Route path="/courses" element={<AllCourse />} />
-                <Route path="/scores" element={<AllCourse />} />
+                <Route path="/courses/:id" element={<TaskCourse />} />
+                <Route path="/scores" element={<AllCourseToScore/>} />
+                <Route path="/scores/:id" element={<TaskCourse />} />
+                <Route path="/scores/:id/:id" element={<TaskCourse />} />
                 <Route path="/banktasks" element={<BankTasks />} />
-                <Route path="/courses/:id" element={<Task />} />
+                <Route path="/banktasks/:id" element={<TaskPageEdit />} />
                 <Route path="/check" element={<CheckTasks />} />
                 <Route path="/students" element={<Students />} />
                 <Route path="/groups" element={<Groups />} />
@@ -138,6 +144,8 @@ function LayoutMenu(props) {
                 <Route path="/" element={<MyCourse />} />
                 <Route path="/myscores" element={<MyScores />} />
                 <Route path="/mycourses" element={<MyCourse />} />
+                <Route path="/mycourses/:id" element={<TaskCourse />} />
+                <Route path="/mycourses/:id/:idtask" element={<TaskPage />} />
                 <Route path="/logout" element={<Logout />} />
               </Routes>
             )

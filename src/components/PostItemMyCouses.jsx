@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const PostItemMyCouses = (props) => {
   const navigate = useNavigate();
   return (
-    <Card hoverable style={{ margin:" 0px 5px 10px 5px" }} onClick={() => navigate(`${props.post.courses.id}`)}>
+    <Card hoverable style={{ margin:" 0px 0px 10px 0px" }} onClick={() => navigate(`${props.post.courses.id}`)}>
       <div className="post__content" >
         <strong>
          {props.post.courses.name}

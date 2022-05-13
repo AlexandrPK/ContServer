@@ -122,6 +122,13 @@ class TableStudentScores extends React.Component {
         sorter: (a, b) => a.score.length - b.score.length,
         sortDirections: ['descend', 'ascend'],
       },
+      {
+        title: 'Комментарий',
+        dataIndex: 'review',
+        key: 'review',
+        sorter: (a, b) => a.score.length - b.score.length,
+        sortDirections: ['descend', 'ascend'],
+      },
     
     ];
 

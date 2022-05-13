@@ -18,7 +18,8 @@ export const loginThunk = createAsyncThunk(
       
       localStorage.setItem('userData', JSON.stringify({
         token: response.headers.access_token,
-        roleID: responses.data.roleId,                 
+        roleID: responses.data.roleId,   
+        auth: 'true',            
       }))
       return response.data 
     }

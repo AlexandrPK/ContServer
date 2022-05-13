@@ -1,45 +1,143 @@
-import React, { useState} from "react";
-import PostList from "../components/PostList"
+import React, { useState } from "react";
+import PostList from "../components/PostList";
 import PostForm from "../components/PostForm";
 import Layout, { Header } from "antd/lib/layout/layout";
 import axios from "axios";
+import { Button, message, Space, Modal, Form, Input, Radio } from "antd";
 import { useEffect } from "react";
+
+const CourseCreateForm = ({ visible, onCreate, onCancel }) => {
+  const [form] = Form.useForm();
+  return (
+    <Modal
+      visible={visible}
+      title="Добавить новый курс"
+      okText="Добавить"
+      cancelText="Отмена"
+      onCancel={onCancel}
+      onOk={() => {
+        form
+          .validateFields()
+          .then((values) => {
+            form.resetFields();
+            onCreate(values);
+          })
+          .catch((info) => {
+            console.log("Validate Failed:", info);
+          });
+      }}
+    >
+      <Form
+        form={form}
+        layout="vertical"
+        name="form_in_modal"
+        initialValues={{
+          modifier: "public",
+        }}
+      >
+        <Form.Item
+          name="name"
+          label="Название курса"
+          rules={[
+            {
+              required: true,
+              message: "Введите название курса",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="year"
+          label="Год"
+          rules={[
+            {
+              required: true,
+              message: "Введите учебный год",
+            },
+          ]}
+        >
+          <Input type="textarea" />
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
+};
 
 const AllCourse = () => {
   const [posts, setPosts] = useState([]);
-
+  const [visible, setVisible] = useState(false);
   //TODO получение постов
 
-  const data = JSON.parse(localStorage.getItem('userData'))
+  const data = JSON.parse(localStorage.getItem("userData"));
 
   async function fetchPosts() {
     const response = await axios.get(
-      "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/allCourses",{headers: { Authorization : data.token,}}
+      "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/allCourses",
+      { headers: { Authorization: data.token } }
     );
-    console.log(response.data)
+    console.log(response.data);
     setPosts(response.data);
+  }
+
+  async function AddCourseFetch(values) {
+    await axios
+      .post(
+        "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/addCourse",
+        { name: values.name, year: values.year },
+        { headers: { Authorization: data.token } }
+      )
+      .then((response) => {
+        message.success('Курс добавлен');
+        console.log(response.data);
+      })
+      .catch((error) => {
+        message.error(error.message);
+      });
   }
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost]);
-  };
+  // const createPost = (newPost) => {
+  //   setPosts([...posts, newPost]);
+  // };
 
-  const removePost = (post) => {
-    setPosts(posts.filter((p) => p.id !== post.id));
+  // const removePost = (post) => {
+  //   setPosts(posts.filter((p) => p.id !== post.id));
+  // };
+
+  const onCreate = (values) => {
+    AddCourseFetch(values);
+    console.log("Received values of form: ", values);
+    setVisible(false);
   };
 
   return (
     <div>
       <Layout style={{ background: "#fff" }}>
-        <PostForm create={createPost} />
+        <Space style={{ margin: "5px" }}>
+          <Button
+            onClick={() => {
+              setVisible(true);
+            }}
+          >
+            Добавить курс
+          </Button>
+          <CourseCreateForm
+            visible={visible}
+            onCreate={onCreate}
+            onCancel={() => {
+              setVisible(false);
+            }}
+          />
+        </Space>
+
         {posts.length ? (
-          <PostList remove={removePost} posts={posts} title="Список курсов" /> 
-          // <h1>Загрузка...</h1>
+          <PostList posts={posts} title="Список курсов" />
         ) : (
+          // <h1>Загрузка...</h1>
           <div style={{ textAlign: "center" }}>
             {" "}
             <h1>Пока нет подготовленных курсов</h1>
