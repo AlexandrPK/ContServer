@@ -28,6 +28,9 @@ import Logout from "./pages/Logout";
 import LayoutMenu from "./layout/LayoutMenu";
 
 function App() {
+  localStorage.setItem('userData', JSON.stringify({ 
+        auth: 'false',            
+      }))
   const data = JSON.parse(localStorage.getItem("userData"));
 
   return (
