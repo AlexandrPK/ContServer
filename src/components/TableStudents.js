@@ -3,6 +3,9 @@ import "antd/dist/antd.css";
 import { message, Table, Input, Button, Space, Form, Select } from "antd";
 import Highlighter from "react-highlight-words";
 import axios from "axios";
+import "./index.css";
+
+
 
 import { SearchOutlined } from "@ant-design/icons";
 
@@ -25,6 +28,7 @@ const EditableCell = ({
   title,
   editable,
   children,
+  groups,
   dataIndex,
   record,
   handleSave,
@@ -51,8 +55,8 @@ const EditableCell = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
+      console.log("save",values)
       toggleEdit();
-
       handleSave({ ...record, ...values });
     } catch (errInfo) {
       console.log("Save failed:", errInfo);
@@ -69,18 +73,17 @@ const EditableCell = ({
         }}
         name={dataIndex}
       >
-        <Select ref={inputRef} onPressEnter={save} onBlur={save}>
+        <Select ref={inputRef} onBlur={save}>
           <Option value="8374">8374</Option>
-          <Option value="8370">8370</Option>
           <Option value="8182">8182</Option>
+          <Option value="8199">8199</Option>
         </Select>
       </Form.Item>
     ) : (
       <div
         className="editable-cell-value-wrap"
         style={{
-          padding: 9,
-          margin: 0,
+          paddingRight: 24,
         }}
         onClick={toggleEdit}
       >
@@ -94,24 +97,14 @@ const EditableCell = ({
 
 class TableStudents extends React.Component {
   constructor(props) {
-
     const data = JSON.parse(localStorage.getItem("userData"));
 
-    async function fetchGroups() {
-      await axios
-        .get(
-          "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/allGroupsCourses",
-          { headers: { Authorization: data.token } }
-        )
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          message.error(error.message);
-        });
-    }
+    const student = props.posts.map((item) => {
+      item.key = item.id;
+      return item;
+    });
 
-    fetchGroups();
+    console.log(student);
     super(props);
     this.columns = [
       {
@@ -158,7 +151,8 @@ class TableStudents extends React.Component {
       },
     ];
     this.state = {
-      dataSource: [...this.props.posts],
+      dataSource: [...student],
+      count: this.props.posts.length,
     };
   }
 
@@ -258,6 +252,26 @@ class TableStudents extends React.Component {
     this.setState({ searchText: "" });
   };
 
+  handleDelete = (key) => {
+    const dataSource = [...this.state.dataSource];
+    this.setState({
+      dataSource: dataSource.filter((item) => item.key !== key),
+    });
+  };
+  handleAdd = () => {
+    const { count, dataSource } = this.state;
+    console.log(count);
+    const newData = {
+      key: count,
+      name: `Edward King ${count}`,
+      age: "32",
+      address: `London, Park Lane no. ${count}`,
+    };
+    this.setState({
+      dataSource: [...dataSource, newData],
+      count: count + 1,
+    });
+  };
   handleSave = (row) => {
     const newData = [...this.state.dataSource];
     const index = newData.findIndex((item) => row.key === item.key);
@@ -268,22 +282,15 @@ class TableStudents extends React.Component {
     });
   };
 
-  handleDelete = (key) => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({
-      dataSource: dataSource.filter((item) => item.key !== key),
-    });
-  };
-
   render() {
     const { dataSource } = this.state;
+    console.log(dataSource);
     const components = {
       body: {
         row: EditableRow,
         cell: EditableCell,
       },
     };
-
     const columns = this.columns.map((col) => {
       if (!col.editable) {
         return col;
@@ -300,17 +307,16 @@ class TableStudents extends React.Component {
         }),
       };
     });
-
-    console.log("DATA =", dataSource);
-
     return (
-      <Table
-        components={components}
-        rowClassName={() => "editable-row"}
-        bordered
-        columns={columns}
-        dataSource={dataSource}
-      />
+      <div style={{ marginTop: "15px" }}>
+        <Table
+          components={components}
+          rowClassName={() => "editable-row"}
+          bordered
+          dataSource={dataSource}
+          columns={columns}
+        />
+      </div>
     );
   }
 }

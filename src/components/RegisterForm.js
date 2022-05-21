@@ -63,7 +63,7 @@ const RegisterForm = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label="Login"
+          label="Логин"
           name="login"
           rules={[
             {
@@ -90,7 +90,7 @@ const RegisterForm = () => {
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Пароль"
           name="password"
           rules={[
             {

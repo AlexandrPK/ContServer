@@ -155,6 +155,14 @@ const Groups = () => {
             >
               Добавить группу
             </Button>
+
+            <Button
+              onClick={() => {
+                setVisible(true);
+              }}
+            >
+              Добавить группу на курс
+            </Button>
             <GroupCreateForm
               visible={visible}
               onCreate={onCreate}

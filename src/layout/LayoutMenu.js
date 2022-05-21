@@ -79,10 +79,7 @@ function LayoutMenu(props) {
                 <Menu.Item key="6">
                   <Link to="/groups">Группы </Link>
                 </Menu.Item>
-                <Menu.Item key="7">
-                  <Link to="/passwordChange">Смена пароля</Link>
-                </Menu.Item>
-                <Menu.Item key="8" style={{ marginLeft: "auto" }}>
+                <Menu.Item key="7" style={{ marginLeft: "auto" }}>
                   <Link to="/logout">Выйти</Link>
                 </Menu.Item>
               </Menu>
@@ -112,7 +109,7 @@ function LayoutMenu(props) {
               style={{ lineHeight: "64px", display: "flex", zIndex: "100" }}
             >
               <Menu.Item key="0">
-                <Link to="/login">Логин </Link>
+                <Link to="/login">Войти </Link>
               </Menu.Item>
               <Menu.Item key="1">
                 <Link to="/reg">Регистрация </Link>

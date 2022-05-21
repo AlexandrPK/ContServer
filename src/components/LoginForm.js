@@ -98,7 +98,7 @@ function onFinish (values) {
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          label="Login"
+          label="Логин"
           name="username"
           rules={[
             {
@@ -114,7 +114,7 @@ function onFinish (values) {
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Пароль"
           name="password"
           rules={[
             {

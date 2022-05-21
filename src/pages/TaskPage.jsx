@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
+import { Form, Select, Checkbox } from "antd";
 
 import { Link, useNavigate } from "react-router-dom";
 import PostList from "../components/PostList";
@@ -67,6 +68,13 @@ const TaskPage = () => {
       });
   }
 
+  function onFinish(values) {
+    // .then(fetchPosts())
+    console.log("Received values of form: ", values);
+  }
+
+  const onFinishFailed = (errorInfo) => {};
+
   useEffect(() => {
     fetchPosts();
     console.log("posts", posts);
@@ -81,64 +89,111 @@ const TaskPage = () => {
       }}
     >
       <Content>
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : (
-     
-        <Layout style={{ backgroundColor: "white" }}>
-        <Row style={{ height: "100vh", margin: "10px" }} wrap={false}>
-          <Col
-            style={{
-              height: "auto",
-              width: "40vw",
-              marginRight: "5px",
-              padding: "10px",
-              backgroundColor: "white",
-              border: "1px solid #cccecf",
-              borderRadius: "6px",
-            }}
-            span={12}
-          >
-            <div style={{ height: "auto", overflow: "scroll" }}>
-            <h1>{posts.task.name}</h1>
-            <Markdown children={posts.task.description} />
+        {isLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <Layout style={{ backgroundColor: "white" }}>
+            {posts.task.taskTypeId === 1 ? (
+              <div>
+                <h2>{posts.task.name}</h2>
+                <Markdown children={posts.task.description} />
 
-            </div>
-          </Col>
-          <Col
-            style={{
-              height: "auto",
-              width: "50vw",
-              marginRight: "5px",
-              padding: "10px",
-              backgroundColor: "white",
-              border: "1px solid #cccecf",
-              borderRadius: "6px",
-            }}
-            span={12}
-          >
-            <h1>Ответ на задание</h1>
-            <div style={{ overflow: "hidden" }}>
-              <SQLEditor
-                value={markdownContent}
-                onChange={setMarkdownContent}
-              />
-            </div>
-            <h1>Возвращение ответа</h1>
-            <div style={{ height: "auto", overflow: "scroll" }}>
-              <Space>
-                <Button type="primary" loading>
-                  Запустить код
-                </Button>
-                <Button type="primary">Отправить решение</Button>
-              </Space>
-            </div>
-          </Col>
-        </Row>
-      </Layout>
-        
+                <Form
+                  name="solution_variant"
+                  onFinish={onFinish}
+                  initialValues={{}}
+                >
+                  <Form.Item name="checkbox-group">
+                    <Checkbox.Group>
+                      {posts.solutionVariants.map((solution) => (
+                        <Row>
+                          <Col span={8}>
+                            <Checkbox
+                              key={solution.id}
+                              value={solution.id}
+                              style={{
+                                lineHeight: "32px",
+                              }}
+                            >
+                              {solution.solution} <br />{" "}
+                            </Checkbox>
+                          </Col>
+                        </Row>
+                      ))}
+                    </Checkbox.Group>
+                  </Form.Item>
 
-      )}
+                  <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                      Ответить
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </div>
+            ) : (
+              <Row style={{ height: "100vh", margin: "10px" }} wrap={false}>
+                <Col
+                  style={{
+                    height: "auto",
+                    width: "40vw",
+                    marginRight: "5px",
+                    padding: "10px",
+                    backgroundColor: "white",
+                    border: "1px solid #cccecf",
+                    borderRadius: "6px",
+                  }}
+                  span={12}
+                >
+                  <div style={{ height: "auto", overflow: "scroll" }}>
+                    <h1>{posts.task.name}</h1>
+                    <Markdown children={posts.task.description} />
+                  </div>
+                </Col>
+                <Col
+                  style={{
+                    height: "auto",
+                    width: "50vw",
+                    marginRight: "5px",
+                    padding: "10px",
+                    backgroundColor: "white",
+                    border: "1px solid #cccecf",
+                    borderRadius: "6px",
+                  }}
+                  span={12}
+                >
+                  <h1>Ответ на задание</h1>
+                  <div style={{ overflow: "hidden" }}>
+                    <SQLEditor
+                      value={markdownContent}
+                      onChange={setMarkdownContent}
+                    />
+                  </div>
+
+                  <div style={{ height: "auto", overflow: "scroll" }}>
+                    <Space>
+                      {posts.task.taskTypeId === 2 ? (
+                        <Space>
+                          <Button type="primary">Запустить код</Button>
+                          <Button type="primary" loading>
+                            {" "}
+                            Отправить решение{" "}
+                          </Button>
+                        </Space>
+                      ) : (
+                        <Space>
+                          <Button type="primary" loading>
+                            {" "}
+                            Отправить решение{" "}
+                          </Button>
+                        </Space>
+                      )}
+                    </Space>
+                  </div>
+                </Col>
+              </Row>
+            )}
+          </Layout>
+        )}
       </Content>
     </div>
   );

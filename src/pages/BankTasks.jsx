@@ -13,6 +13,9 @@ import {
   Radio,
 } from "antd";
 
+
+const { TextArea } = Input;
+
 const BankTasks = () => {
   const data = JSON.parse(localStorage.getItem("userData"));
   const { Option } = Select;
@@ -57,6 +60,26 @@ const BankTasks = () => {
           }}
         >
           <Form.Item
+            name="taskTypeId"
+            label="Тип задания"
+            rules={[
+              {
+                required: true,
+                message: "Выберите тип задания",
+              },
+            ]}
+          >
+            <Select
+              style={{ width: 220 }}
+              // onChange={handleChange}
+            >
+              <Option value="1">1.Тест</Option>
+              <Option value="2">2.Автоматическое</Option>
+              <Option value="3">3.Ручная проверка</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
             name="name"
             label="Название задания"
             rules={[
@@ -78,7 +101,7 @@ const BankTasks = () => {
               },
             ]}
           >
-            <Input />
+          <TextArea rows={3} />
           </Form.Item>
           <Form.Item
             name="solution"
@@ -90,26 +113,7 @@ const BankTasks = () => {
               },
             ]}
           >
-            <Input type="textarea" />
-          </Form.Item>
-          <Form.Item
-            name="taskTypeId"
-            label="Сложность"
-            rules={[
-              {
-                required: true,
-                message: "Выберите сложность",
-              },
-            ]}
-          >
-            <Select
-              style={{ width: 120 }}
-              // onChange={handleChange}
-            >
-              <Option value="1">Легкое</Option>
-              <Option value="2">Среднее</Option>
-              <Option value="3">Сложное</Option>
-            </Select>
+          <TextArea rows={3} />
           </Form.Item>
         </Form>
       </Modal>
@@ -129,11 +133,12 @@ const BankTasks = () => {
     await axios
       .post(
         "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/addtask",
-        { 
-          description: values.description, 
-          name: values.name, 
-          solution: values.solution, 
-          taskTypeId: values.taskTypeId },
+        {
+          description: values.description,
+          name: values.name,
+          solution: values.solution,
+          taskTypeId: values.taskTypeId,
+        },
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
