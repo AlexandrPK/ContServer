@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
-import { Form, Select, Checkbox } from "antd";
+import { Form, Select, Checkbox, Table } from "antd";
 
 import { Link, useNavigate } from "react-router-dom";
 import PostList from "../components/PostList";
@@ -40,7 +40,11 @@ const TaskPage = () => {
   };
 
   const [posts, setPosts] = useState(null);
+  const [attempt, setAttempt] = useState(null);
+  const [attemptScore, setAttemptScore] = useState(null);
   const [isLoading, setisLoading] = useState(true);
+  const [isLoadingAttempt, setisLoadingAttemptg] = useState(true);
+  const [isLoadingAttemptScore, setisLoadingAttemptgScore] = useState(true);
   const [markdownContent, setMarkdownContent] = useState("");
 
   //TODO получение постов
@@ -65,6 +69,58 @@ const TaskPage = () => {
         // onLogoutHandler();
         // console.log(isAuth);
         // navigate("/login");
+      });
+  }
+
+  async function AddSQLAttempt() {
+    await axios
+      .post(
+        "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/score/addSQLAttempt",
+        { taskId: posts.task.id, courseId: id, solution: markdownContent },
+        { headers: { Authorization: data.token } }
+      )
+      .then((response) => {
+        // message.success(response.timeout);
+        console.log(response.data);
+        setAttempt(response.data);
+        setisLoadingAttemptg(false);
+      })
+      .catch((error) => {
+        message.error(error.message);
+      });
+  }
+
+  async function AddSQLAttemptTask() {
+    await axios
+      .post(
+        "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/score/addSQLAttempt",
+        { taskId: posts.task.id, courseId: id, solution: markdownContent },
+        { headers: { Authorization: data.token } }
+      )
+      .then((response) => {
+        console.log(response.data);
+        message.success("Задание отправлено на проверку");
+      })
+      .catch((error) => {
+        message.error(error.message);
+      });
+  }
+
+  async function AddSQLAttemptScore() {
+    await axios
+      .post(
+        "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/score/addSQLAttemptScore",
+        { taskId: posts.task.id, courseId: id, solution: markdownContent },
+        { headers: { Authorization: data.token } }
+      )
+      .then((response) => {
+        // message.success(response.timeout);
+        console.log(response.data);
+        setAttemptScore(response.data);
+        setisLoadingAttemptgScore(false);
+      })
+      .catch((error) => {
+        message.error(error.message);
       });
   }
 
@@ -168,23 +224,77 @@ const TaskPage = () => {
                       onChange={setMarkdownContent}
                     />
                   </div>
+                  <div>
+                    {isLoadingAttempt ? (
+                      ""
+                    ) : (
+                      <div>
+                        <h1>Результат запуска кода</h1>
 
+                        {attempt.openResult !== null ? (
+                          <table>
+                            {attempt.openResult.map((item) => (
+                              <tr>
+                                {item.map((list) => (
+                                  <td>
+                                    {list} {""}
+                                  </td>
+                                ))}{" "}
+                              </tr>
+                            ))}
+                          </table>
+                        ) : (
+                          ""
+                        )}
+
+                        <p>
+                          Cледующий запуск кода будет доступен через{" "}
+                          {attempt.timeout / 1000} сек
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    {isLoadingAttemptScore ? (
+                      ""
+                    ) : (
+                      <div>
+                        <h1>Проверка</h1>
+                        {attemptScore.results.length > 1 ? (
+                          <div>
+                            <p>
+                              Открытые тесты: {attemptScore.results[0].success.toString()}
+                            </p>
+                            <p>
+                              Закрытые тесты: {attemptScore.results[1].success.toString()}
+                            </p>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
+                        <p>
+                          Cледующая отправка попытки будет доступена через{" "}
+                          {attemptScore.timeout / 1000} сек
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   <div style={{ height: "auto", overflow: "scroll" }}>
                     <Space>
                       {posts.task.taskTypeId === 2 ? (
                         <Space>
-                          <Button type="primary">Запустить код</Button>
-                          <Button type="primary" loading>
-                            {" "}
-                            Отправить решение{" "}
+                          <Button type="primary" onClick={AddSQLAttempt}>
+                            Запустить код
+                          </Button>
+                          <Button type="primary" onClick={AddSQLAttemptScore}>
+                            Отправить решение
                           </Button>
                         </Space>
                       ) : (
                         <Space>
-                          <Button type="primary" loading>
-                            {" "}
-                            Отправить решение{" "}
-                          </Button>
+                          <Button type="primary" onClick={AddSQLAttemptTask}>Отправить решение</Button>
                         </Space>
                       )}
                     </Space>

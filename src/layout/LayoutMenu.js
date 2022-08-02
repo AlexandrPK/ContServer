@@ -23,6 +23,7 @@ import TaskCourse from "../pages/TaskCourse";
 import BankTasks from "../pages/BankTasks";
 import MyCourse from "../pages/MyCourse";
 import MyScores from "../pages/MyScores";
+import Scores from "../pages/Scores";
 import Groups from "../pages/Groups";
 import Logout from "../pages/Logout";
 import TaskPage from "../pages/TaskPage";
@@ -125,7 +126,7 @@ function LayoutMenu(props) {
                 <Route path="/" element={<AllCourse />} />
                 <Route path="/courses" element={<AllCourse />} />
                 <Route path="/courses/:id" element={<TaskCourse />} />
-                <Route path="/scores" element={<AllCourseToScore/>} />
+                <Route path="/scores" element={<Scores/>} />
                 <Route path="/scores/:id" element={<TaskCourse />} />
                 <Route path="/scores/:id/:id" element={<TaskCourse />} />
                 <Route path="/banktasks" element={<BankTasks />} />
