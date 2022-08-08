@@ -46,7 +46,6 @@ const Task = () => {
         <div>
           {posts.map(
             (post, index) => (
-              console.log(index, post),
               (<TasksCourse post={post} key={post.task.id} />)
             )
           )}

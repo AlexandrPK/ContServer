@@ -29,14 +29,11 @@ const TaskPageEdit = () => {
       })
     );
     dispatch(logout());
-    console.log(isAuth);
-    console.log(data);
   };
 
   const [posts, setPosts] = useState([]);
   const [isLoading, setisLoading] = useState(true);
   const [markdownContent, setMarkdownContent] = useState("");
-  //TODO получение постов
 
   async function fetchPosts() {
     const response = await axios.get(
@@ -46,19 +43,7 @@ const TaskPageEdit = () => {
     );
     setPosts(response.data);
     setMarkdownContent(response.data.task.description);
-    console.log(response.data);
     setisLoading(false);
-    // .then((response) => {
-    //   console.log(response.data);
-    //   setPosts(response.data);
-    //   setMarkdownContent(response.data.description)
-    // })
-    // .catch((error) => {
-    //   message.error(error.message);
-    //   onLogoutHandler();
-    //   console.log(isAuth);
-    //   navigate("/login");
-    // });
   }
 
   async function UpdateTask(values) {
@@ -75,7 +60,6 @@ const TaskPageEdit = () => {
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
-        console.log(response.data);
         message.success("Задание изменено");
       })
       .catch((error) => {
@@ -85,28 +69,7 @@ const TaskPageEdit = () => {
 
   const onFinish = (values) => {
     UpdateTask(values);
-    // console.log(values);
   };
-
-  // async function updateTask() {
-  //   await axios
-  //     .get(
-  //       "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/get/" +
-  //         id,
-  //       { headers: { Authorization: data.token } }
-  //     )
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setPosts(response.data);
-  //       setMarkdownContent(response.data.description)
-  //     })
-  //     .catch((error) => {
-  //       message.error(error.message);
-  //       onLogoutHandler();
-  //       console.log(isAuth);
-  //       navigate("/login");
-  //     });
-  // }
   const { Option } = Select;
   const { TextArea } = Input;
 

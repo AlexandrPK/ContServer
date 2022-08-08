@@ -16,7 +16,6 @@ const AllCourseToScore = () => {
     const response = await axios.get(
       "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/allCourses",{headers: { Authorization : data.token,}}
     );
-    console.log(response.data)
     setPosts(response.data);
   }
 

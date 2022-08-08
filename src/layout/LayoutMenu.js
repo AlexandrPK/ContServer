@@ -46,9 +46,7 @@ function LayoutMenu(props) {
   };
 
   const { Header, Content } = Layout;
-  const isAuth = useSelector((state) => state.auth.isAuth);
 
-  // console.log("roleId in sataet->", data);
   return (
     <div className="App">
       <Layout style={{ background: "#fff" }}>

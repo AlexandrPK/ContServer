@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
 import { message } from "antd";
-import { nullErrorMessage } from "../redux/authSlice";
-import { useSelector } from "react-redux";
 import axios from "axios";
 
 const layout = {
@@ -26,7 +23,6 @@ const PasswordChangeForm = () => {
   const data = JSON.parse(localStorage.getItem("userData"));
 
   const onFinish = (values) => {
-    console.log(values);
 
     axios({
       method: "post",
@@ -36,7 +32,6 @@ const PasswordChangeForm = () => {
     })
       .then(function (response) {
         message.success("Пароль сменен");
-        console.log(response);
       })
       .catch(function (error) {
         // обработка ошибки

@@ -1,10 +1,7 @@
 import React from "react";
-import { Form, Input, Button, Select } from "antd";
+import { Select } from "antd";
 import RegisterForm from "../components/RegisterForm";
-// import { useDispatch } from 'react-redux'
 
-// import { registerThunk } from '../redux/registerSlice'
-// import styles from '../styles/RegisterForm.module.scss'
 
 const layout = {
   labelCol: {
@@ -24,14 +21,7 @@ const tailLayout = {
 const { Option } = Select;
 
 const Regist = () => {
-  // const dispatch = useDispatch()
-
-  // const onFinish = (values) => {
-  //   dispatch(registerThunk(values))
-  // }
-
-  // const onFinishFailed = (errorInfo) => {}
-
+  
   return (
     <>
     <RegisterForm/>

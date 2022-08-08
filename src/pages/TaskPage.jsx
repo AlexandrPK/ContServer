@@ -19,8 +19,6 @@ import Markdown from "react-markdown";
 
 const TaskPage = () => {
   const { idtask, id } = useParams();
-  // console.log("ig",idtask)
-
   const data = JSON.parse(localStorage.getItem("userData"));
   let navigate = useNavigate();
 
@@ -35,8 +33,6 @@ const TaskPage = () => {
       })
     );
     dispatch(logout());
-    console.log(isAuth);
-    console.log(data);
   };
 
   const [posts, setPosts] = useState(null);
@@ -46,8 +42,6 @@ const TaskPage = () => {
   const [isLoadingAttempt, setisLoadingAttemptg] = useState(true);
   const [isLoadingAttemptScore, setisLoadingAttemptgScore] = useState(true);
   const [markdownContent, setMarkdownContent] = useState("");
-
-  //TODO получение постов
 
   async function fetchPosts() {
     await axios
@@ -59,16 +53,11 @@ const TaskPage = () => {
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
-        console.log("response-->", response.data);
         setPosts(response.data);
         setisLoading(false);
-        // console.log("posts",posts);/
       })
       .catch((error) => {
         message.error(error.message);
-        // onLogoutHandler();
-        // console.log(isAuth);
-        // navigate("/login");
       });
   }
 
@@ -80,8 +69,6 @@ const TaskPage = () => {
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
-        // message.success(response.timeout);
-        console.log(response.data);
         setAttempt(response.data);
         setisLoadingAttemptg(false);
       })
@@ -98,7 +85,6 @@ const TaskPage = () => {
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
-        console.log(response.data);
         message.success("Задание отправлено на проверку");
       })
       .catch((error) => {
@@ -114,8 +100,6 @@ const TaskPage = () => {
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
-        // message.success(response.timeout);
-        console.log(response.data);
         setAttemptScore(response.data);
         setisLoadingAttemptgScore(false);
       })
@@ -125,15 +109,12 @@ const TaskPage = () => {
   }
 
   function onFinish(values) {
-    // .then(fetchPosts())
-    console.log("Received values of form: ", values);
   }
 
   const onFinishFailed = (errorInfo) => {};
 
   useEffect(() => {
     fetchPosts();
-    console.log("posts", posts);
   }, []);
   return (
     <div

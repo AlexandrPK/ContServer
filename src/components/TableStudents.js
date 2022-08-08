@@ -1,15 +1,12 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import "antd/dist/antd.css";
-import { message, Table, Input, Button, Space, Form, Select } from "antd";
+import { Table, Input, Button, Space, Form, Select } from "antd";
 import Highlighter from "react-highlight-words";
-import axios from "axios";
 import "./index.css";
 
 
 
 import { SearchOutlined } from "@ant-design/icons";
-
-//TODO получение постов
 
 const EditableContext = React.createContext(null);
 
@@ -55,11 +52,9 @@ const EditableCell = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
-      console.log("save",values)
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
-      console.log("Save failed:", errInfo);
     }
   };
 

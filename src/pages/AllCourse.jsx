@@ -23,7 +23,6 @@ const CourseCreateForm = ({ visible, onCreate, onCancel }) => {
             onCreate(values);
           })
           .catch((info) => {
-            console.log("Validate Failed:", info);
           });
       }}
     >
@@ -67,7 +66,7 @@ const CourseCreateForm = ({ visible, onCreate, onCancel }) => {
 const AllCourse = () => {
   const [posts, setPosts] = useState([]);
   const [visible, setVisible] = useState(false);
-  //TODO получение постов
+
 
   const data = JSON.parse(localStorage.getItem("userData"));
 
@@ -76,7 +75,6 @@ const AllCourse = () => {
       "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/allCourses",
       { headers: { Authorization: data.token } }
     );
-    console.log(response.data);
     setPosts(response.data);
   }
 
@@ -89,7 +87,6 @@ const AllCourse = () => {
       )
       .then((response) => {
         message.success('Курс добавлен');
-        console.log(response.data);
       })
       .catch((error) => {
         message.error(error.message);
@@ -100,18 +97,8 @@ const AllCourse = () => {
     fetchPosts();
   }, []);
 
-  // const createPost = (newPost) => {
-  //   setPosts([...posts, newPost]);
-  // };
-
-  // const removePost = (post) => {
-  //   setPosts(posts.filter((p) => p.id !== post.id));
-  // };
-
   const onCreate = (values) => {
-    AddCourseFetch(values);
-    console.log("Received values of form: ", values);
-    setVisible(false);
+    AddCourseFetch(values);    setVisible(false);
   };
 
   return (
@@ -137,7 +124,6 @@ const AllCourse = () => {
         {posts.length ? (
           <PostList posts={posts} title="Список курсов" />
         ) : (
-          // <h1>Загрузка...</h1>
           <div style={{ textAlign: "center" }}>
             {" "}
             <h1>Пока нет подготовленных курсов</h1>

@@ -47,7 +47,6 @@ const BankTasks = () => {
               onCreate(values);
             })
             .catch((info) => {
-              console.log("Validate Failed:", info);
             });
         }}
       >
@@ -126,7 +125,6 @@ const BankTasks = () => {
       { headers: { Authorization: data.token } }
     );
     setPosts(response.data);
-    console.log(response.data);
   }
 
   async function AddTaskFetch(values) {
@@ -142,7 +140,6 @@ const BankTasks = () => {
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
-        console.log(response.data);
         message.success("Задание добавлено");
       })
       .catch((error) => {
@@ -156,7 +153,6 @@ const BankTasks = () => {
 
   const onCreate = (values) => {
     AddTaskFetch(values);
-    console.log("Received values of form: ", values);
     setVisible(false);
   };
 

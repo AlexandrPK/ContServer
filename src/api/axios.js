@@ -1,5 +1,4 @@
 import qs from "qs";
-import { message } from "antd";
 
 const axios = require("axios");
 
@@ -22,7 +21,6 @@ export default class API {
       })
       
     } catch (error) {
-      console.log("payload in axios", error.message);
       return error
     }
   }
@@ -43,14 +41,11 @@ export default class API {
   }
 
   async register(payload) {
-    console.log("api/register/payload", payload , {headers: {
-          "Content-Type": "application/json",
-        }},);
 
     try {
       return await instance.post("/api/user/add", payload);
     } catch (error) {
-      console.log("axios error", error);
+
       return error;
     }
   }

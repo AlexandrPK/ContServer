@@ -1,18 +1,11 @@
 import React, { useState, useEffect} from "react";
 import PostList from "../components/PostList"
-import PostForm from "../components/PostForm";
 import Layout, { Header } from "antd/lib/layout/layout";
-import { useParams } from "react-router-dom";
-import TasksCourse from "../components/TasksCourse";
-
-import { Content } from "antd/lib/layout/layout";
 import axios from "axios";
 
 const CheckTasks = () => {
   const [posts, setPosts] = useState([
   ]);
-
-  //TODO получение постов
 
   const data = JSON.parse(localStorage.getItem('userData'))
 
@@ -39,9 +32,7 @@ return (
   <div>
   <Layout style={{ background: "#fff" }}>
     {posts.length ? (
-      console.log(posts),
       <PostList remove={removePost} posts={posts} title="Список курсов" /> 
-      // <h1>Загрузка...</h1>
     ) : (
       <div style={{ textAlign: "center" }}>
         {" "}

@@ -15,7 +15,6 @@ const Students = () => {
       "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/api/users",
       { headers: { Authorization: data.token } }
     );
-    console.log("RESPONSE", response.data);
     setPosts(response.data);
     setisLoasding(false);
   }
@@ -28,10 +27,8 @@ const Students = () => {
       )
       .then((response) => {
         setGroups(response.data);
-        console.log("полученные группы", response.data);
       });
   }
-  // console.log("пол",groups);
 
   useEffect(() => {
     fetchPosts();

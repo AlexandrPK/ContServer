@@ -8,9 +8,6 @@ export const registerThunk = createAsyncThunk(
     'register/registerThunk',      
     async (payload, thunkAPI) => {
       const response = await api.register(payload)
-
-      console.log('register/registerThunk, response', response)
-
       return response.data || response.response.data.message || response.response.data.error || response
     }
   )

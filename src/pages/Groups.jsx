@@ -31,7 +31,6 @@ const GroupCreateForm = ({ visible, onCreate, onCancel }) => {
             onCreate(values);
           })
           .catch((info) => {
-            console.log("Validate Failed:", info);
           });
       }}
     >
@@ -87,8 +86,6 @@ const Groups = () => {
       })
     );
     dispatch(logout());
-    console.log(isAuth);
-    console.log(data);
   };
 
   const [posts, setPosts] = useState([]);
@@ -103,12 +100,10 @@ const Groups = () => {
       )
       .then((response) => {
         setPosts(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         message.error(error.message);
         onLogoutHandler();
-        console.log(isAuth);
         navigate("/login");
       });
   }
@@ -121,7 +116,6 @@ const Groups = () => {
         { headers: { Authorization: data.token } }
       )
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
         message.error(error.message);
@@ -136,7 +130,6 @@ const Groups = () => {
 
   const onCreate = (values) => {
     AddGroupFetch(values)
-    console.log("Received values of form: ", values);
     setVisible(false);
     message.success('Группа добавлена');
 
@@ -172,7 +165,6 @@ const Groups = () => {
             />
           </Space>
           {posts.map((post, index) => (
-            //  console.log(index,post),
             <GroupItem post={post} key={post.id} />
           ))}
         </div>

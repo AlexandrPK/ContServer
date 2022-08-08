@@ -13,7 +13,6 @@ const MyScores = () => {
       )
       .then( response => {
       const datas = {...response.data, }
-      console.log(datas)
       const post = [];
       
       for (let key in datas){

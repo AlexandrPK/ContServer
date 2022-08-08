@@ -30,34 +30,9 @@ const Logout = () => {
       })
     );
     dispatch(logout());
-    // console.log(isAuth);
-    // console.log(data);
   };
 
   const [posts, setPosts] = useState([]);
-
-  //TODO получение постов
-
-  // async function fetchPosts() {
-  //   await axios
-  //     .get(
-  //       "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/task/allGroups",
-  //       { headers: { Authorization: data.token } }
-  //     )
-  //     .then((response) => {
-  //       setPosts(response.data);
-  //     })
-  //     .catch((error) => {
-  //       message.error(error.message);
-  //       onLogoutHandler();
-  //       console.log(isAuth);
-  //       navigate("/login");
-  //     });
-  // }
-
-  // useEffect(() => {
-  //   fetchPosts();
-  // }, []);
 
   return (
     <Content>

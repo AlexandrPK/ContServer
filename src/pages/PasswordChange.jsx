@@ -3,7 +3,6 @@ import Spin from "antd/es/spin";
 import "antd/lib/spin/style/index.css";
 import PasswordChangeForm from "../components/PasswordChangeForm";
 import axios from "axios";
-import { useEffect } from "react";
 
 export default function PasswordChange() {
 
@@ -16,12 +15,8 @@ export default function PasswordChange() {
       { headers: { Authorization: data.token } }
     );
 
-    console.log(response.data);
-  }
 
-  useEffect(() => {
-    // fetchPosts();
-  }, []);
+  }
 
   return (
     <>

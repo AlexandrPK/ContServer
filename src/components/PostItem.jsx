@@ -1,7 +1,5 @@
 import React from "react";
 import { Card } from "antd";
-import LolButton from "./UI/button/LolButton";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const PostItem = (props) => {

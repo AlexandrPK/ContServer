@@ -8,12 +8,6 @@ export const loginThunk = createAsyncThunk(
     'auth/loginThunk',      
     async (payload, thunkAPI) => {
       const response = await api.login(payload)
-      
-      // console.log('auth/loginThunk, response', response)
-      console.log('auth/loginThunk, response', response)
-      
-      // Handle error from express 
-      // if (response?.response?.data?.message) throw new Error(response?.response?.data?.message)
       const responses = await api.role(response)
       
       localStorage.setItem('userData', JSON.stringify({
@@ -43,7 +37,6 @@ export const authSlice = createSlice({
     },
     reducers: {
       login: (state, action) => {
-        console.log('authSlice/login', action.payload)
         state.isAuth = true
         state.token = action.payload.token
       },
@@ -73,7 +66,6 @@ export const authSlice = createSlice({
         [loginThunk.rejected]: (state, action) => {
           state.loading = false
           state.error = true
-          console.log('loginThunk.rejected/ action.error', action.error)
           state.errMessage = action.error.name || 'Sorry, something went wrong'
         },
       }
