@@ -31,7 +31,8 @@ import TaskPageEdit from "../pages/TaskPageEdit";
 import AllCourseToScore from "../pages/AllCourseToScore";
 
 function LayoutMenu(props) {
-  const data = JSON.parse(localStorage.getItem("userData"));
+  const data = {auth: true}
+
   let navigate = useNavigate();
   const dispatch = useDispatch();
 

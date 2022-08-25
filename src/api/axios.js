@@ -1,6 +1,7 @@
 import qs from "qs";
+import axios from "axios"
 
-const axios = require("axios");
+// const axios = require("axios");
 
 const instance = axios.create({
   baseURL: "http://ec2-3-123-32-242.eu-central-1.compute.amazonaws.com:8080/",
