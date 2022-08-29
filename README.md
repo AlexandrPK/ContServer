@@ -3,3 +3,12 @@ The administrator can check tasks, create them. The functionality of managing pa
 
 ## App view
 
+![image](https://github.com/AlexandrPK/Contest/blob/main/scores.jpeg)
+
+![image](https://github.com/AlexandrPK/Contest/blob/main/tasks.gif)
+
+Adding a student group
+![image](https://github.com/AlexandrPK/Contest/blob/main/add_group.gif)
+
+
+
