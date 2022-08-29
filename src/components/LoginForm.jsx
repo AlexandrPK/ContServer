@@ -32,10 +32,10 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   let errMessage = useSelector((state) => state.auth.errMessage);
 
-function onFinish (values) {
- dispatch(loginThunk(values))
-    navigate("/")
-  };
+  function onFinish(values) {
+    dispatch(loginThunk(values));
+    navigate("/");
+  }
 
   const onFinishFailed = (errorInfo) => {};
 
@@ -45,7 +45,7 @@ function onFinish (values) {
         errMessage,
       ]);
   });
-  
+
   return (
     <>
       <h1 style={{ textAlign: "center", marginTop: "15px" }}>Вход</h1>

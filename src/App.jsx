@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import LayoutMenu from "./layout/LayoutMenu";
+import React from 'react';
+import LayoutMenu from './layout/LayoutMenu';
 
 function App() {
-  return (
-  <LayoutMenu/>
-  )
+  return <LayoutMenu />;
 }
 
 export default App;
