@@ -7,11 +7,10 @@ import "../styles/App.css";
 import "../style.css";
 
 import axios from "axios";
-import { message } from "antd";
 
-import "antd/dist/antd.css";
+import 'antd/dist/antd.css';
 
-import { Layout, Menu } from "antd";
+import { message, Layout, Menu } from 'antd';
 
 import AllCourse from "../pages/AllCourse";
 import CheckTasks from "../pages/CheckTasks";
